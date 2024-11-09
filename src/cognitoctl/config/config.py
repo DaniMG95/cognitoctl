@@ -12,7 +12,7 @@ class Config:
     __APP_CLIENT_SECRET = "app_client_secret"
     __SECRET_HASH = "secret_hash"
     __PARAMS_CONFIG = [__KEY_ID, __ACCESS_KEY, __USERPOOL_ID, __APP_CLIENT_ID, __APP_CLIENT_SECRET, __SECRET_HASH]
-    __PATH_CONFIG = f"{Path.home()}\\.pycognito" if os.name == "nt" else f"{Path.home()}/.pycognito"
+    __PATH_CONFIG = f"{Path.home()}\\.cognitoctl" if os.name == "nt" else f"{Path.home()}/.cognitoctl"
     __FILE_CONFIG = "\\config.toml" if os.name == "nt" else "/config.toml"
     __FILE_CONFIG_PATH = f"{__PATH_CONFIG}{__FILE_CONFIG}"
     __CURRENT = "current"
@@ -74,9 +74,9 @@ class Config:
                                                  "config")
             diff = set(cls.__PARAMS_CONFIG) - set(config[name])
             if diff:
-                errors += f"Config {name} need this values: {', '.join(diff)}\n"
+                errors += f"\nConfig {name} need these values: {', '.join(diff)}"
         if errors:
-            raise ExceptionCLIValidateConfig(f"Need these values in config file: \n {errors}")
+            raise ExceptionCLIValidateConfig(f"Need these values in config file:{errors}")
 
     @classmethod
     def get_config(cls) -> dict:
