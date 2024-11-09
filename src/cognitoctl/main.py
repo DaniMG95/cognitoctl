@@ -1,12 +1,12 @@
 # flake8: noqa
 import click
-from cognitopy.cli.commands import init
-from cognitopy.cli.commands import user as user_commands
-from cognitopy.cli.commands import group as group_commands
-from cognitopy.cli.commands import password as password_commands
-from cognitopy.cli.commands import session as session_commands
-from cognitopy.cli.commands import user_maintenance as user_maintenance_commands
-from cognitopy.cli.commands import config as config_commands
+from cognitoctl.commands import init
+from cognitoctl.commands import user as user_commands
+from cognitoctl.commands import group as group_commands
+from cognitoctl.commands import password as password_commands
+from cognitoctl.commands import session as session_commands
+from cognitoctl.commands import user_maintenance as user_maintenance_commands
+from cognitoctl.commands import config as config_commands
 
 
 @click.group()

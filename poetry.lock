@@ -13,17 +13,17 @@ files = [
 
 [[package]]
 name = "boto3"
-version = "1.35.56"
+version = "1.35.57"
 description = "The AWS SDK for Python"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "boto3-1.35.56-py3-none-any.whl", hash = "sha256:d04608cf40f429025eb66b52b835bdc333436022918788853ed0bbbba6dd2f09"},
-    {file = "boto3-1.35.56.tar.gz", hash = "sha256:6fcc510a4e747e85f84046b0ba0e5b178e89ba0f8ac9e2b6ebb4cc925c68c23b"},
+    {file = "boto3-1.35.57-py3-none-any.whl", hash = "sha256:9edf49640c79a05b0a72f4c2d1e24dfc164344b680535a645f455ac624dc3680"},
+    {file = "boto3-1.35.57.tar.gz", hash = "sha256:db58348849a5af061f0f5ec9c3b699da5221ca83354059fdccb798e3ddb6b62a"},
 ]
 
 [package.dependencies]
-botocore = ">=1.35.56,<1.36.0"
+botocore = ">=1.35.57,<1.36.0"
 jmespath = ">=0.7.1,<2.0.0"
 s3transfer = ">=0.10.0,<0.11.0"
 
@@ -32,13 +32,13 @@ crt = ["botocore[crt] (>=1.21.0,<2.0a0)"]
 
 [[package]]
 name = "botocore"
-version = "1.35.56"
+version = "1.35.57"
 description = "Low-level, data-driven core of boto 3."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "botocore-1.35.56-py3-none-any.whl", hash = "sha256:4be97f7bc1fbf33ad71ee1b678cea0ecf9638e61d5f566a46f261cde969dd690"},
-    {file = "botocore-1.35.56.tar.gz", hash = "sha256:8a9e752c8e87a423575ac528340a35d4318b8576ae4c6e0acfe5a3867f6bbccf"},
+    {file = "botocore-1.35.57-py3-none-any.whl", hash = "sha256:92ddd02469213766872cb2399269dd20948f90348b42bf08379881d5e946cc34"},
+    {file = "botocore-1.35.57.tar.gz", hash = "sha256:d96306558085baf0bcb3b022d7a8c39c93494f031edb376694d2b2dcd0e81327"},
 ]
 
 [package.dependencies]
@@ -79,13 +79,13 @@ colorama = {version = "*", markers = "platform_system == \"Windows\""}
 
 [[package]]
 name = "cognitopy"
-version = "1.1.4"
+version = "1.1.5"
 description = "Python package to use aws cognito in a simple way"
 optional = false
 python-versions = "<4.0.0,>=3.9.0"
 files = [
-    {file = "cognitopy-1.1.4-py3-none-any.whl", hash = "sha256:c6714406e44f9db3953b47b1b40d717ef7b19e9ff1386703100eb4e26d5ef9ce"},
-    {file = "cognitopy-1.1.4.tar.gz", hash = "sha256:74469c06e45a5276d596d548502c2eb01dfbd5ea5635fd55a5bef03594837af6"},
+    {file = "cognitopy-1.1.5-py3-none-any.whl", hash = "sha256:6a3213242b4f5bc4482d11930de47a9ddce8ffc39082e7322099463ed75b85e3"},
+    {file = "cognitopy-1.1.5.tar.gz", hash = "sha256:809ba7b17e790f710a878ff3c9ce8d16860f318777d9164b0b49fa9a11722c24"},
 ]
 
 [package.dependencies]
@@ -722,4 +722,4 @@ test = ["covdefaults (>=2.3)", "coverage (>=7.2.7)", "coverage-enable-subprocess
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.9.0"
-content-hash = "4a86ffd82772b14f4feaa6f819528f78f9fa0cc4bf52e284e2d66c9eb79ea34d"
+content-hash = "5f396fd0fe28d640dcd1976c6ad4a14e9a1e0c89f75339860551f771e7f15299"

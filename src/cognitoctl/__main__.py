@@ -1,4 +1,4 @@
-from cognitoclt.main import cli
+from cognitoctl.main import cli
 
 
 def main():

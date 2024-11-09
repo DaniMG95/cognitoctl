@@ -1,10 +1,10 @@
 [tool.poetry]
-name = "cognitoclt"
+name = "cognitoctl"
 version = "1.0.0"
 description = "CLI to use aws cognito in a simple way"
 authors = ["Daniel Muñoz Gonzalez <dani16595@gmail.com>"]
 readme = "README.md"
-packages = [{ include = "cognitoclt", from = "src" }]
+packages = [{ include = "cognitoctl", from = "src" }]
 keywords = ["aws", "cognito", "authentication", "authorization", "python", "cli"]
 repository = "https://github.com/DaniMG95/cognitoctl"
 documentation = "https://github.com/DaniMG95/cognitoctl/blob/main/README.md"
@@ -40,12 +40,12 @@ source=["src"]
 
 
 [tool.poetry.scripts]
-cognitopy = "cognitoctl.__main__:main"
+cognitoctl = "cognitoctl.__main__:main"
 
 
 [tool.poetry.dependencies]
 python = "^3.9.0"
-cognitopy = "1.1.4"
+cognitopy = "1.1.5"
 click = "^8.1.7"
 toml = "^0.10.2"
 

@@ -1,7 +1,7 @@
 import click
 from cognitopy import CognitoPy
 from cognitopy.exceptions import ExceptionAuthCognito
-from cognitopy.cli.commands import init_cognitopy
+from cognitoctl.commands import init_cognitopy
 
 
 @click.command()

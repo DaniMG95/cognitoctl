@@ -1,6 +1,6 @@
 import click
-from cognitopy.cli.config.config import Config
-from cognitopy.exceptions import ExceptionCLIValidateConfig
+from cognitoctl.config import Config
+from cognitoctl.exceptions import ExceptionCLIValidateConfig
 
 
 @click.command()

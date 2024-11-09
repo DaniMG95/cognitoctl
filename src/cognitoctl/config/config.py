@@ -1,7 +1,7 @@
 import toml
 from pathlib import Path
 import os
-from cognitopy.exceptions import ExceptionCLIValidateConfig
+from cognitoctl.exceptions import ExceptionCLIValidateConfig
 
 
 class Config:

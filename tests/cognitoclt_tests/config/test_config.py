@@ -1,7 +1,7 @@
 from unittest import TestCase
 from unittest.mock import patch, Mock, call, mock_open
-from cognitopy.cli.config import Config
-from cognitopy.exceptions import ExceptionCLIValidateConfig
+from cognitoctl.config import Config
+from cognitoctl.exceptions import ExceptionCLIValidateConfig
 import tempfile
 import toml
 import os
