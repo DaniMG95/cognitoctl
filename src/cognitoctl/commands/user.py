@@ -105,10 +105,13 @@ def get(cognitopy: CognitoPy, username: str):
 
 @click.command()
 @click.option("--group", "-g", required=False, type=str)
+@click.option("--limit", "-l", required=False, type=int)
+@click.option("--filter_attr", "-f",multiple=True , required=False, type=list[str])
 @init_cognitopy
-def list(cognitopy: CognitoPy, group: str):
+def list(cognitopy: CognitoPy, group: str, limit: int, filter_attr: list[str]):
     try:
-        users = cognitopy.list_users(group=group)
+        click.echo(filter_attr)
+        users = cognitopy.list_users(group=group, limit=limit)
     except ExceptionAuthCognito as e:
         click.echo(e)
     else:
