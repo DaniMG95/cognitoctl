@@ -8,16 +8,10 @@ from cognitopy.enums import MessageAction
 @click.command()
 @click.option("--username", "-u", required=True, type=str)
 @click.option("--password", "-p", required=True, type=str)
-@click.option('-c', '--confirm', is_flag=True)
 @init_cognitopy
-def create(cognitopy: CognitoPy, username: str, password: str, confirm: bool):
+def create(cognitopy: CognitoPy, username: str, password: str):
     try:
-        if confirm:
-            cognitopy.admin_create_user(username=username, temporary_password=password, user_attributes={},
-                                        message_action=MessageAction.SUPPRESS, force_alias=False,
-                                        desired_delivery=[])
-        else:
-            cognitopy.register(username=username, password=password)
+        cognitopy.register(username=username, password=password)
     except ExceptionAuthCognito as e:
         click.echo(e)
     else:
@@ -26,11 +20,18 @@ def create(cognitopy: CognitoPy, username: str, password: str, confirm: bool):
 
 @click.command()
 @click.option("--username", "-u", required=True, type=str)
-@click.option("--code", "-c", required=True, type=str)
+@click.option("--code", "-c", required=False, type=str)
+@click.option("--force", "-f", is_flag=True)
 @init_cognitopy
-def confirm(cognitopy: CognitoPy, username: str):
+def confirm(cognitopy: CognitoPy, username: str, code: str, force: bool):
     try:
-        cognitopy.admin_confirm_register(username=username)
+        if force:
+            cognitopy.admin_confirm_register(username=username)
+        else:
+            if code:
+                cognitopy.confirm_register(username=username, confirmation_code=code)
+            else:
+                click.echo("Confirmation code is required")
     except ExceptionAuthCognito as e:
         click.echo(e)
     else:
@@ -88,8 +89,31 @@ def disable(cognitopy: CognitoPy, username: str):
     else:
         click.echo("User disabled successfully")
 
-# Disabled user
-# Enable user
-# get user
-# list users
-# List users in group
+
+@click.command()
+@click.argument("username", type=str)
+@init_cognitopy
+def get(cognitopy: CognitoPy, username: str):
+    try:
+        user = cognitopy.admin_get_user(username=username)
+    except ExceptionAuthCognito as e:
+        click.echo(e)
+    else:
+        for key, value in user.items():
+            click.echo(f"{key}: {value}")
+
+
+@click.command()
+@click.option("--group", "-g", required=False, type=str)
+@init_cognitopy
+def list(cognitopy: CognitoPy, group: str):
+    try:
+        users = cognitopy.list_users(group=group)
+    except ExceptionAuthCognito as e:
+        click.echo(e)
+    else:
+        for user in users:
+            for key, value in user.items():
+                click.echo(f"{key}: {value}")
+            click.echo("--------------------------------\n")
+        click.echo(f"Total users: {len(users)}")
