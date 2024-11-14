@@ -45,7 +45,7 @@ cognitoctl = "cognitoctl.__main__:main"
 
 [tool.poetry.dependencies]
 python = "^3.9.0"
-cognitopy = "1.1.5"
+cognitopy = "1.1.6"
 click = "^8.1.7"
 toml = "^0.10.2"
 
