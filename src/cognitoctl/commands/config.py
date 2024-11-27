@@ -5,6 +5,7 @@ from cognitoctl.exceptions import ExceptionCLIValidateConfig
 
 @click.command()
 def list():
+    """List all config projects."""
     projects = Config.get_projects()
     click.echo("Projects:")
     for project in projects:
@@ -13,12 +14,14 @@ def list():
 
 @click.command()
 def current():
+    """Show current project."""
     click.echo(f"Current project: {Config().name}")
 
 
 @click.command()
 @click.argument("name", type=str)
 def set(name: str):
+    """Set current config project."""
     try:
         Config.set_name(name)
     except ExceptionCLIValidateConfig as e:
@@ -30,6 +33,7 @@ def set(name: str):
 @click.command()
 @click.argument("name", type=str)
 def get(name: str):
+    """Get config project."""
     try:
         config = Config(name=name)
         click.echo(f"Config {name}:")
@@ -44,6 +48,7 @@ def get(name: str):
 @click.command()
 @click.argument("name", type=str)
 def delete(name: str):
+    """Delete config project."""
     try:
         Config.delete(name)
     except ExceptionCLIValidateConfig as e:
@@ -54,9 +59,10 @@ def delete(name: str):
 
 @click.command()
 @click.argument("name", type=str)
-@click.option("key", "-k", type=str, required=True)
-@click.option("value", "-v", type=str, required=True)
+@click.option("key", "-k", type=str, required=True, help="Key of config")
+@click.option("value", "-v", type=str, required=True, help="Value of config")
 def edit(name: str, value: str, key: str):
+    """Edit config project."""
     try:
         Config.edit(name=name, field=key, value=value)
     except ExceptionCLIValidateConfig as e:

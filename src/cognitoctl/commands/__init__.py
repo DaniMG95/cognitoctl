@@ -21,7 +21,7 @@ def init_cognitopy(func):
     return wrapper
 
 
-@click.option("--config-file", "-f", required=False, type=str)
+@click.option("--config-file", "-f", required=False, type=str, help="Config file path")
 @click.command()
 def init(config_file):
     """Initialization configuration."""

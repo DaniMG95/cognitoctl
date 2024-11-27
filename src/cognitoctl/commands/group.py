@@ -5,12 +5,13 @@ from cognitoctl.commands import init_cognitopy
 
 
 @click.command()
-@click.option("name", "-n", required=True, type=str)
-@click.option("description", "-d", required=True, type=str)
-@click.option("precedence", "-p", required=True, type=int)
-@click.option("role_arn", "-r", required=True, type=str)
+@click.option("name", "-n", required=True, type=str, help="Group name")
+@click.option("description", "-d", required=True, type=str, help="Group description")
+@click.option("precedence", "-p", required=True, type=int, help="Group precedence")
+@click.option("role_arn", "-r", required=True, type=str, help="Group role arn")
 @init_cognitopy
 def create(cognitopy: CognitoPy, name: str, description: str, precedence: int, role_arn: str):
+    """Create a group."""
     try:
         cognitopy.admin_create_group(group_name=name, description=description, precedence=precedence, role_arn=role_arn)
     except ExceptionAuthCognito as e:
@@ -22,6 +23,7 @@ def create(cognitopy: CognitoPy, name: str, description: str, precedence: int, r
 @click.argument("name", type=str)
 @init_cognitopy
 def delete(cognitopy: CognitoPy, name: str):
+    """Delete a group."""
     try:
         cognitopy.admin_delete_group(group_name=name)
     except ExceptionAuthCognito as e:
@@ -31,10 +33,11 @@ def delete(cognitopy: CognitoPy, name: str):
 
 
 @click.command()
-@click.option("username", "-u", required=True, type=str)
-@click.option("group", "-g", required=True, type=str)
+@click.option("username", "-u", required=True, type=str, help="Username")
+@click.option("group", "-g", required=True, type=str, help="Group name")
 @init_cognitopy
 def delete_user(cognitopy: CognitoPy, username: str, group: str):
+    """Delete a user from a group."""
     try:
         cognitopy.admin_remove_user_from_group(group_name=group, username=username)
     except ExceptionAuthCognito as e:
@@ -44,10 +47,11 @@ def delete_user(cognitopy: CognitoPy, username: str, group: str):
 
 
 @click.command()
-@click.option("username", "-u", required=True, type=str)
-@click.option("group", "-g", required=True, type=str)
+@click.option("username", "-u", required=True, type=str, help="Username")
+@click.option("group", "-g", required=True, type=str, help="Group name")
 @init_cognitopy
 def add_user(cognitopy: CognitoPy, username: str, group: str):
+    """Add a user to a group."""
     try:
         cognitopy.admin_add_user_to_group(username=username, group_name=group)
     except ExceptionAuthCognito as e:
@@ -57,10 +61,11 @@ def add_user(cognitopy: CognitoPy, username: str, group: str):
 
 
 @click.command()
-@click.option("--username", "-u", required=False, type=str)
-@click.option("--limit", "-l", required=False, type=int)
+@click.option("--username", "-u", required=False, type=str, help="Username")
+@click.option("--limit", "-l", required=False, type=int, help="Limit")
 @init_cognitopy
 def list(cognitopy: CognitoPy, username: str, limit: int):
+    """List all groups, can filter by user."""
     try:
         if username:
             groups = cognitopy.admin_list_groups_for_user(username=username, limit=limit)
@@ -80,6 +85,7 @@ def list(cognitopy: CognitoPy, username: str, limit: int):
 @click.argument("group", type=str)
 @init_cognitopy
 def get(cognitopy: CognitoPy, group: str):
+    """Get a group."""
     try:
         user = cognitopy.get_group(group=group)
     except ExceptionAuthCognito as e:
@@ -90,14 +96,15 @@ def get(cognitopy: CognitoPy, group: str):
 
 
 @click.command()
-@click.option("--group", "-g", required=True, type=str)
-@click.option("--description", "-d", required=False, type=str)
-@click.option("--role", "-r", required=False, type=str)
-@click.option("--precedence", "-p", required=False, type=int)
+@click.option("--group", "-g", required=True, type=str, help="Group name")
+@click.option("--description", "-d", required=False, type=str, help="Group description")
+@click.option("--role", "-r", required=False, type=str, help="Group role")
+@click.option("--precedence", "-p", required=False, type=int, help="Group precedence")
 @init_cognitopy
 def edit(cognitopy: CognitoPy, group:str, description: str, role: str, precedence: int):
+    """Edit a group."""
     try:
-        groups = cognitopy.update_group(group=group, description=description, role=role, precedence=precedence)
+        cognitopy.update_group(group=group, description=description, role=role, precedence=precedence)
     except ExceptionAuthCognito as e:
         click.echo(e)
     else:
