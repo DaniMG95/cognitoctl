@@ -1,0 +1,41 @@
+name: Test PR
+run-name: ${{ github.head_ref }} testing PR
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  test-PR:
+    permissions: write-all
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v3
+      with:
+        python-version: "3.10"
+    - name: Install Poetry
+      uses: snok/install-poetry@v1
+      with:
+        virtualenvs-create: true
+        virtualenvs-in-project: true
+    - name: Install dependencies
+      run: |
+        poetry install
+    - name: Lint with flake8
+      run: |
+        # stop the build if there are Python syntax errors or undefined names
+        poetry run flake8
+    - name: Test with unittest
+      run: |
+        poetry run coverage run -m unittest
+    - name: Generate xml Coverage
+      run: |
+        poetry run coverage xml
+    - name: Monitor coverage
+      uses: orgoro/coverage@v3
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        coverageFile: "coverage.xml"
+        thresholdAll: 0.90
+        thresholdNew: 0.95
