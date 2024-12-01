@@ -1,0 +1,38 @@
+name: Create Package and Deploy to PyPI
+run-name: ${{ github.head_ref }} Create Package and Deploy to PyPI
+on: 
+  push:
+    branches:
+      - main
+jobs:
+  pypi-publish:
+    name: Upload release to PyPI
+    permissions: write-all
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/p/cognitoctl/
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.10"
+
+      - name: Install Poetry
+        uses: snok/install-poetry@v1
+        with:
+          virtualenvs-create: true
+          virtualenvs-in-project: true
+
+      - name: Install dependencies
+        run: poetry install --no-interaction --no-root
+
+      - name: Publish to TestPyPI
+        env:
+          POETRY_PYPI_TOKEN_TEST_PYPI: ${{ secrets.PYPI_API_TOKEN }}
+        run: |
+          poetry config pypi-token.pypi ${{ secrets.PYPI_API_TOKEN }}
+          poetry publish --build --username __token__ --password ${{ secrets.PYPI_API_TOKEN }}
