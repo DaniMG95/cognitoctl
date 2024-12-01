@@ -5,7 +5,11 @@ from cognitoctl.exceptions import ExceptionCLIValidateConfig
 
 @click.command()
 def list():
-    """List all config projects."""
+    """
+    List all configuration projects.
+
+    This command displays a list of all available configuration projects.
+    """
     projects = Config.get_projects()
     click.echo("Projects:")
     for project in projects:
@@ -14,14 +18,22 @@ def list():
 
 @click.command()
 def current():
-    """Show current project."""
+    """
+    Show the current configuration project.
+
+    This command displays the name of the currently active configuration project.
+    """
     click.echo(f"Current project: {Config().name}")
 
 
 @click.command()
 @click.argument("name", type=str)
 def set(name: str):
-    """Set current config project."""
+    """
+    Set the current configuration project.
+
+    This command sets the specified project as the active configuration project.
+    """
     try:
         Config.set_name(name)
     except ExceptionCLIValidateConfig as e:
@@ -33,7 +45,12 @@ def set(name: str):
 @click.command()
 @click.argument("name", type=str)
 def get(name: str):
-    """Get config project."""
+    """
+    Get details of a specific configuration project.
+
+    This command retrieves and displays the properties of a specified
+    configuration project.
+    """
     try:
         config = Config(name=name)
         click.echo(f"Config {name}:")
@@ -48,7 +65,11 @@ def get(name: str):
 @click.command()
 @click.argument("name", type=str)
 def delete(name: str):
-    """Delete config project."""
+    """
+    Delete a configuration project.
+
+    This command permanently deletes the specified configuration project.
+    """
     try:
         Config.delete(name)
     except ExceptionCLIValidateConfig as e:
@@ -59,10 +80,15 @@ def delete(name: str):
 
 @click.command()
 @click.argument("name", type=str)
-@click.option("key", "-k", type=str, required=True, help="Key of config")
-@click.option("value", "-v", type=str, required=True, help="Value of config")
+@click.option("key", "-k", type=str, required=True, help="The key of the configuration setting to edit.")
+@click.option("value", "-v", type=str, required=True, help="The new value for the configuration setting.")
 def edit(name: str, value: str, key: str):
-    """Edit config project."""
+    """
+    Edit a configuration setting in a project.
+
+    This command modifies a specific setting within the configuration project
+    by updating the value of the specified key.
+    """
     try:
         Config.edit(name=name, field=key, value=value)
     except ExceptionCLIValidateConfig as e:

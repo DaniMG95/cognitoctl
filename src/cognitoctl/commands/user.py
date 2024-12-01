@@ -5,11 +5,13 @@ from cognitoctl.commands import init_cognitopy
 
 
 @click.command()
-@click.option("--username", "-u", required=True, type=str, help="Username")
-@click.option("--password", "-p", required=True, type=str, help="Password")
+@click.option("--username", "-u", required=True, type=str, help="Username of the user to create.")
+@click.option("--password", "-p", required=True, type=str, help="Password for the user.")
 @init_cognitopy
 def create(cognitopy: CognitoPy, username: str, password: str):
-    """Create a user."""
+    """
+    Create a new user in Cognito.
+    """
     try:
         cognitopy.register(username=username, password=password)
     except ExceptionAuthCognito as e:
@@ -19,12 +21,17 @@ def create(cognitopy: CognitoPy, username: str, password: str):
 
 
 @click.command()
-@click.option("--username", "-u", required=True, type=str, help="Username")
-@click.option("--code", "-c", required=False, type=str, help="Confirmation code")
-@click.option("--force", "-f", is_flag=True, help="Force confirmation")
+@click.option("--username", "-u", required=True, type=str, help="Username of the user to confirm.")
+@click.option("--code", "-c", required=False, type=str, help="Confirmation code provided to the user.")
+@click.option("--force", "-f", is_flag=True, help="Force confirmation without a code.")
 @init_cognitopy
 def confirm(cognitopy: CognitoPy, username: str, code: str, force: bool):
-    """Confirm a user."""
+    """
+    Confirm a user's registration in Cognito.
+
+    Use the confirmation code provided to the user or force the confirmation
+    using administrative privileges.
+    """
     try:
         if force:
             cognitopy.admin_confirm_register(username=username)
@@ -43,7 +50,9 @@ def confirm(cognitopy: CognitoPy, username: str, code: str, force: bool):
 @click.argument("username", type=str)
 @init_cognitopy
 def delete(cognitopy: CognitoPy, username: str):
-    """Delete a user."""
+    """
+    Delete a user from Cognito.
+    """
     try:
         cognitopy.admin_delete_user(username=username)
     except ExceptionAuthCognito as e:
@@ -53,12 +62,14 @@ def delete(cognitopy: CognitoPy, username: str):
 
 
 @click.command()
-@click.option("--username", "-u", required=True, type=str, help="Username")
-@click.option("--previous", "-r", required=True, type=str, help="Previous password")
-@click.option("--password", "-p", required=True, type=str, help="New password")
+@click.option("--username", "-u", required=True, type=str, help="Username of the user.")
+@click.option("--previous", "-r", required=True, type=str, help="Current or previous password.")
+@click.option("--password", "-p", required=True, type=str, help="New password.")
 @init_cognitopy
 def change_password(cognitopy: CognitoPy, username: str, previous: str, password: str):
-    """Change password of a user."""
+    """
+    Change the password of an existing user.
+    """
     try:
         tokens = cognitopy.login(username=username, password=previous)
         cognitopy.change_password(previous_password=previous, proposed_password=password,
@@ -73,7 +84,9 @@ def change_password(cognitopy: CognitoPy, username: str, previous: str, password
 @click.argument("username", type=str)
 @init_cognitopy
 def enable(cognitopy: CognitoPy, username: str):
-    """Enable a user."""
+    """
+    Enable a disabled user in Cognito.
+    """
     try:
         cognitopy.admin_enable_user(username=username)
     except ExceptionAuthCognito as e:
@@ -86,7 +99,9 @@ def enable(cognitopy: CognitoPy, username: str):
 @click.argument("username", type=str)
 @init_cognitopy
 def disable(cognitopy: CognitoPy, username: str):
-    """Disable a user."""
+    """
+    Disable an active user in Cognito.
+    """
     try:
         cognitopy.admin_disable_user(username=username)
     except ExceptionAuthCognito as e:
@@ -99,7 +114,9 @@ def disable(cognitopy: CognitoPy, username: str):
 @click.argument("username", type=str)
 @init_cognitopy
 def get(cognitopy: CognitoPy, username: str):
-    """Get a user."""
+    """
+    Retrieve details of a specific user.
+    """
     try:
         user = cognitopy.admin_get_user(username=username)
     except ExceptionAuthCognito as e:
@@ -110,14 +127,16 @@ def get(cognitopy: CognitoPy, username: str):
 
 
 @click.command()
-@click.option("--group", "-g", required=False, type=str, help="Group name")
-@click.option("--limit", "-l", required=False, type=int, help="Limit")
-@click.option("--filter_attr", "-f",multiple=True, required=False, type=list[str], help="Filter attributes")
+@click.option("--group", "-g", required=False, type=str, help="Filter users by group name.")
+@click.option("--limit", "-l", required=False, type=int, help="Limit the number of users displayed.")
 @init_cognitopy
-def list(cognitopy: CognitoPy, group: str, limit: int, filter_attr: list[str]):
-    """List all users, can filter by group."""
+def list(cognitopy: CognitoPy, group: str, limit: int):
+    """
+    List users in Cognito.
+
+    Optionally filter users by group or limit the number of results displayed.
+    """
     try:
-        click.echo(filter_attr)
         users = cognitopy.list_users(group=group, limit=limit)
     except ExceptionAuthCognito as e:
         click.echo(e)

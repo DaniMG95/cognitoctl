@@ -21,10 +21,16 @@ def init_cognitopy(func):
     return wrapper
 
 
-@click.option("--config-file", "-f", required=False, type=str, help="Config file path")
+@click.option("--config-file", "-f", required=False, type=str, help="Configuration file for project.")
 @click.command()
 def init(config_file):
-    """Initialization configuration."""
+    """
+    Initialize the configuration for a Cognito project.
+
+    This command sets up the configuration for a new or existing Cognito project.
+    You can either provide the configuration through a file or by entering the
+    details interactively via the command line.
+    """
     try:
         if config_file:
             click.echo(f"Reading config from {config_file}")

@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: pypi
-      url: https://test.pypi.org/p/cognitopy/
+      url: https://test.pypi.org/p/cognitoctl/
     permissions:
       id-token: write
     steps:
@@ -17,10 +17,10 @@ jobs:
         with:
           ref: ${{ github.head_ref }}
 
-      - name: Set up Python 3.9
+      - name: Set up Python 3.10
         uses: actions/setup-python@v3
         with:
-          python-version: "3.9"
+          python-version: "3.10"
 
       - name: Install Poetry
         uses: snok/install-poetry@v1

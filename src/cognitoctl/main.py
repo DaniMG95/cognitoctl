@@ -13,36 +13,37 @@ def cli():
 
 @cli.group()
 def user():
-    """User-related commands."""
+    """
+    Manage Cognito users.
+
+    Provides a set of actions to create, confirm, delete, enable, disable,
+    retrieve, and manage user passwords in AWS Cognito. You can also list
+    users with optional filters.
+    """
     pass
 
 
 @cli.group()
 def group():
-    """Group-related commands."""
+    """
+    Manage Cognito groups.
+
+    This set of commands allows you to create, edit, delete, and manage users
+    in Cognito groups. You can list groups and manage their properties like
+    description, precedence, and role ARN.
+    """
     pass
 
-
-@cli.group()
-def password():
-    """Password-related commands."""
-    pass
-
-
-@cli.group()
-def session():
-    """Session-related commands."""
-    pass
-
-
-@cli.group()
-def user_maintenance():
-    """User Maintenance-related commands."""
-    pass
 
 @cli.group()
 def config():
-    """Config-related commands."""
+    """
+    Manage configuration projects.
+
+    This group of commands allows you to list, set, get, edit, and delete
+    configuration projects. You can also view and modify specific settings
+    within a project.
+    """
     pass
 
 
