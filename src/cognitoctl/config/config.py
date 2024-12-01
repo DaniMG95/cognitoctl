@@ -107,6 +107,8 @@ class Config:
     @classmethod
     def delete(cls, name: str):
         data = cls.get_config()
+        if name == data[cls.__CURRENT][cls.__PROJECT]:
+            raise ExceptionCLIValidateConfig("Cannot delete current project")
         if name not in data.keys():
             raise ExceptionCLIValidateConfig(f"Name {name} not exists in config file")
         del data[name]
