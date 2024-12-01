@@ -37,7 +37,7 @@ class TestConfig(TestCase):
     @patch('cognitoctl.config.config.Config.get_config')
     @patch.dict('os.environ', {}, clear=True)
     def test_create_config_without_name(self, mock_get_config: Mock):
-        mock_get_config.side_effect =[self.data_config]
+        mock_get_config.side_effect = [self.data_config]
 
         config = Config()
         self.assertTrue(config.secret_hash)

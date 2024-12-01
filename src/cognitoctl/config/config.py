@@ -76,7 +76,7 @@ class Config:
             if diff:
                 errors += f"\nConfig {name} need these values: {', '.join(diff)}"
         if errors:
-            raise ExceptionCLIValidateConfig(f"Need these values in config file:{errors}")
+            raise ExceptionCLIValidateConfig(f"Need these values in config file: {errors}")
 
     @classmethod
     def get_config(cls) -> dict:
@@ -127,7 +127,6 @@ class Config:
 
     def __getitem__(self, key: str):
         return self.__data[key]
-
 
     @property
     def key_id(self) -> str:

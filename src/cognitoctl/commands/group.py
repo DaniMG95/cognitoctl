@@ -23,6 +23,7 @@ def create(cognitopy: CognitoPy, name: str, description: str, precedence: int, r
     else:
         click.echo("Group created successfully")
 
+
 @click.command()
 @click.argument("name", type=str)
 @init_cognitopy
@@ -126,7 +127,7 @@ def get(cognitopy: CognitoPy, group: str):
 @click.option("--role", "-r", required=False, type=str, help="Updated role ARN for the group.")
 @click.option("--precedence", "-p", required=False, type=int, help="Updated precedence for the group.")
 @init_cognitopy
-def edit(cognitopy: CognitoPy, group:str, description: str, role: str, precedence: int):
+def edit(cognitopy: CognitoPy, group: str, description: str, role: str, precedence: int):
     """
     Edit an existing group's details.
 

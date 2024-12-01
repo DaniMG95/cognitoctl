@@ -53,7 +53,7 @@ def get(name: str):
     """
     try:
         config = Config(name=name)
-        click.echo(f"Config {name}:")
+        click.echo(f"Config {name}: ")
         properties_dict = {attr: getattr(config, attr) for attr in dir(config)
                            if isinstance(getattr(type(config), attr, None), property) and attr != "name"}
         for key, value in properties_dict.items():
@@ -95,8 +95,3 @@ def edit(name: str, value: str, key: str):
         click.echo(e)
     else:
         click.echo(f"Edited config {name}")
-
-
-
-
-
